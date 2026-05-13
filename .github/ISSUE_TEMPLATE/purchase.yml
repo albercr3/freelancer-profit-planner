@@ -1,0 +1,38 @@
+name: Purchase request
+description: Request the payment link for Freelancer Profit Planner
+title: "Purchase Freelancer Profit Planner"
+labels: ["purchase-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your interest in Freelancer Profit Planner.
+
+        The product is EUR 12. Do not post private payment details, passwords, tax IDs, or bank details in this public issue.
+  - type: input
+    id: buyer_name
+    attributes:
+      label: Name or business
+      description: Use a public-friendly name.
+      placeholder: Jane Doe Studio
+    validations:
+      required: false
+  - type: dropdown
+    id: payment_method
+    attributes:
+      label: Preferred payment method
+      options:
+        - PayPal
+        - Card / Stripe
+        - Ko-fi
+        - Payhip
+    validations:
+      required: true
+  - type: textarea
+    id: note
+    attributes:
+      label: Note
+      description: Keep this public-friendly. Ask for the payment link or mention your preferred delivery email without posting sensitive information.
+      placeholder: Please send me the payment link.
+    validations:
+      required: false
