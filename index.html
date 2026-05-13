@@ -255,6 +255,62 @@
         line-height: 1.5;
       }
 
+      .purchase {
+        display: grid;
+        grid-template-columns: minmax(0, 0.78fr) minmax(320px, 1fr);
+        gap: 32px;
+        padding: 44px clamp(20px, 5vw, 76px);
+        border-top: 1px solid var(--line);
+        background: var(--paper);
+      }
+
+      .purchase h2 {
+        margin: 0 0 12px;
+        font-size: clamp(2rem, 4vw, 3.4rem);
+        line-height: 1;
+      }
+
+      .purchase p {
+        max-width: 600px;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .steps,
+      .faq {
+        display: grid;
+        gap: 12px;
+      }
+
+      .step,
+      .faq-item {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        padding: 16px;
+      }
+
+      .step strong,
+      .faq-item strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .step span,
+      .faq-item span {
+        display: block;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .purchase-cta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 22px;
+      }
+
       @media (max-width: 920px) {
         header {
           align-items: flex-start;
@@ -263,6 +319,7 @@
 
         .hero,
         .calculator,
+        .purchase,
         .features {
           grid-template-columns: 1fr;
         }
@@ -377,6 +434,62 @@
         <div>
           <h2>Invoices</h2>
           <p>Track invoice status and overdue balances alongside the operating dashboard.</p>
+        </div>
+      </section>
+
+      <section class="purchase" aria-labelledby="purchase-title">
+        <div>
+          <h2 id="purchase-title">Manual purchase flow</h2>
+          <p>
+            The paid product is a private download. Until checkout is connected, purchase requests are handled
+            through GitHub issues so buyers can request a payment link without posting sensitive information.
+          </p>
+          <div class="purchase-cta">
+            <a class="button" href="https://github.com/albercr3/freelancer-profit-planner/issues/new?template=purchase.yml">Request purchase link</a>
+            <a class="button secondary" href="https://github.com/albercr3/freelancer-profit-planner">View public repo</a>
+          </div>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <strong>1. Request the link</strong>
+            <span>Open the purchase request form and choose PayPal, card, Ko-fi, or Payhip as your preferred method.</span>
+          </div>
+          <div class="step">
+            <strong>2. Pay EUR 12</strong>
+            <span>A direct checkout link is sent privately. Do not post payment details in a public issue.</span>
+          </div>
+          <div class="step">
+            <strong>3. Receive the planner</strong>
+            <span>After payment confirmation, the offline browser planner is delivered as a private download.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="purchase" aria-labelledby="faq-title">
+        <div>
+          <h2 id="faq-title">FAQ</h2>
+          <p>
+            Freelancer Profit Planner is a planning tool for solo businesses. It is not accounting, tax,
+            legal, or investment advice.
+          </p>
+        </div>
+        <div class="faq">
+          <div class="faq-item">
+            <strong>Does it require an account?</strong>
+            <span>No. The paid planner opens as a local browser file.</span>
+          </div>
+          <div class="faq-item">
+            <strong>Where is my business data stored?</strong>
+            <span>In your browser local storage unless you export a CSV or JSON backup.</span>
+          </div>
+          <div class="faq-item">
+            <strong>What is included?</strong>
+            <span>Cashflow dashboard, pricing floor, weighted pipeline, invoice tracker, CSV export, JSON backup, README, and personal-use license.</span>
+          </div>
+          <div class="faq-item">
+            <strong>Refund policy</strong>
+            <span>7-day refund if the files cannot be opened in a modern desktop browser.</span>
+          </div>
         </div>
       </section>
     </main>
