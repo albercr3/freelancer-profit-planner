@@ -6,6 +6,8 @@ Live page: https://albercr3.github.io/freelancer-profit-planner/
 
 Price: EUR 12
 
+Hourly rate calculator: https://albercr3.github.io/freelancer-profit-planner/hourly-rate-calculator.html
+
 Free sample: https://albercr3.github.io/freelancer-profit-planner/free-rate-check.csv
 
 Custom setup request: https://github.com/albercr3/freelancer-profit-planner/issues/new?template=setup.yml

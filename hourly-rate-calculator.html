@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Freelance Hourly Rate Calculator</title>
+    <meta
+      name="description"
+      content="Calculate a minimum viable freelance hourly rate from owner draw, business costs, savings target, and billable hours."
+    />
+    <meta property="og:title" content="Freelance Hourly Rate Calculator" />
+    <meta
+      property="og:description"
+      content="Estimate your freelance pricing floor, then upgrade to Freelancer Profit Planner for cashflow, pipeline, tax reserve, and invoice tracking."
+    />
+    <meta property="og:image" content="https://albercr3.github.io/freelancer-profit-planner/product-cover.png" />
+    <meta property="og:url" content="https://albercr3.github.io/freelancer-profit-planner/hourly-rate-calculator.html" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Freelance Hourly Rate Calculator" />
+    <meta
+      name="twitter:description"
+      content="Estimate your freelance pricing floor from monthly costs, savings target, and billable hours."
+    />
+    <meta name="twitter:image" content="https://albercr3.github.io/freelancer-profit-planner/product-cover.png" />
+    <link rel="canonical" href="https://albercr3.github.io/freelancer-profit-planner/hourly-rate-calculator.html" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%231f2a27'/%3E%3Ctext x='13' y='40' font-family='Arial' font-size='23' font-weight='700' fill='%23ffffff'%3EFP%3C/text%3E%3C/svg%3E" />
+    <style>
+      :root {
+        --ink: #18221f;
+        --muted: #5f6f68;
+        --line: #d9e2dd;
+        --paper: #f7f9f6;
+        --surface: #ffffff;
+        --accent: #176b5b;
+        --accent-dark: #0f4c42;
+        --blue: #235b9f;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+      }
+
+      header,
+      main,
+      footer {
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 22px 0;
+      }
+
+      .brand,
+      .nav-link {
+        color: var(--ink);
+        font-weight: 850;
+        text-decoration: none;
+      }
+
+      .brand {
+        display: inline-flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .mark {
+        display: grid;
+        width: 40px;
+        height: 40px;
+        place-items: center;
+        border-radius: 8px;
+        background: #1f2a27;
+        color: #ffffff;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 0.82fr) minmax(320px, 1fr);
+        gap: 34px;
+        align-items: start;
+        padding: 40px 0 30px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.8rem, 6vw, 5.7rem);
+        line-height: 0.96;
+      }
+
+      h2 {
+        margin: 0 0 12px;
+        font-size: clamp(1.7rem, 3vw, 2.5rem);
+        line-height: 1;
+      }
+
+      p {
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .lead {
+        max-width: 650px;
+        font-size: clamp(1.05rem, 2vw, 1.28rem);
+      }
+
+      .actions,
+      .result-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 22px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        border: 1px solid var(--accent);
+        border-radius: 8px;
+        padding: 12px 16px;
+        background: var(--accent);
+        color: #ffffff;
+        font-weight: 820;
+        text-decoration: none;
+      }
+
+      .button.secondary {
+        background: transparent;
+        color: var(--accent-dark);
+      }
+
+      .calculator {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        box-shadow: 0 20px 46px rgba(24, 34, 31, 0.09);
+        padding: 22px;
+      }
+
+      .calc-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      label {
+        display: grid;
+        gap: 7px;
+        color: var(--muted);
+        font-size: 0.88rem;
+        font-weight: 760;
+      }
+
+      input {
+        min-height: 42px;
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 9px 11px;
+        color: var(--ink);
+        font: inherit;
+      }
+
+      input:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(23, 107, 91, 0.12);
+        outline: none;
+      }
+
+      .result {
+        display: grid;
+        gap: 8px;
+        margin-top: 18px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--paper);
+      }
+
+      .result span {
+        color: var(--muted);
+        font-weight: 760;
+      }
+
+      .result strong {
+        font-size: clamp(2.5rem, 6vw, 5rem);
+        line-height: 0.95;
+      }
+
+      .result small {
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1px;
+        margin: 30px 0 42px;
+        background: var(--line);
+      }
+
+      .content-grid article {
+        min-height: 210px;
+        padding: 22px;
+        background: var(--surface);
+      }
+
+      .content-grid h2 {
+        font-size: 1.25rem;
+      }
+
+      footer {
+        padding: 30px 0 42px;
+        border-top: 1px solid var(--line);
+      }
+
+      @media (max-width: 860px) {
+        header {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .hero,
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 540px) {
+        .calc-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Freelance Hourly Rate Calculator",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "EUR"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="./" aria-label="Freelancer Profit Planner home">
+        <span class="mark">FP</span>
+        <span>Freelancer Profit Planner</span>
+      </a>
+      <a class="nav-link" href="./">Full planner</a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <h1>Freelance Hourly Rate Calculator</h1>
+          <p class="lead">
+            Estimate the minimum hourly rate your freelance business needs to cover owner draw,
+            business costs, savings, and available billable hours.
+          </p>
+          <div class="actions">
+            <a class="button" href="https://github.com/albercr3/freelancer-profit-planner/issues/new?template=purchase.yml">Buy the full planner for EUR 12</a>
+            <a class="button secondary" href="https://github.com/albercr3/freelancer-profit-planner/issues/new?template=setup.yml">Request EUR 79 setup</a>
+          </div>
+        </div>
+
+        <section class="calculator" aria-label="Hourly rate calculator">
+          <div class="calc-grid">
+            <label>
+              Monthly owner draw
+              <input id="ownerDraw" type="number" min="0" value="2200" />
+            </label>
+            <label>
+              Monthly business costs
+              <input id="businessCosts" type="number" min="0" value="1500" />
+            </label>
+            <label>
+              Monthly savings target
+              <input id="savingsTarget" type="number" min="0" value="500" />
+            </label>
+            <label>
+              Billable hours / month
+              <input id="billableHours" type="number" min="1" value="100" />
+            </label>
+          </div>
+          <div class="result" aria-live="polite">
+            <span>Minimum viable rate</span>
+            <strong id="rateResult">EUR 42/h</strong>
+            <small id="rateNote">Based on EUR 4,200 monthly need over 100 billable hours.</small>
+          </div>
+          <div class="result-actions">
+            <a class="button secondary" href="./free-rate-check.csv">Download free CSV sample</a>
+          </div>
+        </section>
+      </section>
+
+      <section class="content-grid">
+        <article>
+          <h2>What This Rate Covers</h2>
+          <p>
+            The calculator combines your monthly owner draw, operating costs, and savings target,
+            then divides that need by the hours you can realistically bill.
+          </p>
+        </article>
+        <article>
+          <h2>Why It Is A Floor</h2>
+          <p>
+            It does not include every tax, risk, unpaid admin hour, or bad-debt scenario. Treat it
+            as a minimum, then use the full planner to model cashflow and runway.
+          </p>
+        </article>
+        <article>
+          <h2>Upgrade Path</h2>
+          <p>
+            Freelancer Profit Planner adds a 12-month cashflow dashboard, pipeline weighting,
+            invoice tracking, tax reserve estimate, CSV export, and JSON backup.
+          </p>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        This calculator is a planning aid, not accounting, tax, legal, or investment advice.
+      </p>
+    </footer>
+
+    <script>
+      const rateInputs = {
+        ownerDraw: document.getElementById("ownerDraw"),
+        businessCosts: document.getElementById("businessCosts"),
+        savingsTarget: document.getElementById("savingsTarget"),
+        billableHours: document.getElementById("billableHours"),
+      };
+      const rateResult = document.getElementById("rateResult");
+      const rateNote = document.getElementById("rateNote");
+
+      function asNumber(value) {
+        const parsed = Number(value);
+        return Number.isFinite(parsed) ? parsed : 0;
+      }
+
+      function updateRate() {
+        const need =
+          asNumber(rateInputs.ownerDraw.value) +
+          asNumber(rateInputs.businessCosts.value) +
+          asNumber(rateInputs.savingsTarget.value);
+        const hours = Math.max(1, asNumber(rateInputs.billableHours.value));
+        const rate = Math.ceil(need / hours);
+        rateResult.textContent = `EUR ${rate.toLocaleString("en-US")}/h`;
+        rateNote.textContent = `Based on EUR ${need.toLocaleString("en-US")} monthly need over ${hours.toLocaleString("en-US")} billable hours.`;
+      }
+
+      Object.values(rateInputs).forEach((input) => input.addEventListener("input", updateRate));
+      updateRate();
+    </script>
+  </body>
+</html>
