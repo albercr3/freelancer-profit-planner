@@ -1,0 +1,2 @@
+Monthly owner draw,Monthly business costs,Monthly savings target,Billable hours per month,Minimum viable hourly rate
+2200,1500,500,100,=ROUNDUP((A2+B2+C2)/D2,0)
