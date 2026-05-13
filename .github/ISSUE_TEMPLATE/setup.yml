@@ -1,0 +1,40 @@
+name: Custom setup request
+description: Request a paid setup/customization quote for Freelancer Profit Planner
+title: "Custom setup request"
+labels: ["service-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Request a custom setup for Freelancer Profit Planner.
+
+        Starter price: EUR 79 for a focused setup based on your freelance business model.
+
+        Do not post passwords, bank details, card details, tax IDs, or private payment information in this public issue.
+  - type: input
+    id: business_type
+    attributes:
+      label: Business type
+      placeholder: Freelance developer, design studio, consultant, agency
+    validations:
+      required: true
+  - type: dropdown
+    id: setup_goal
+    attributes:
+      label: Setup goal
+      options:
+        - Cashflow categories
+        - Pricing model
+        - Pipeline setup
+        - Invoice tracking
+        - Full starter setup
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Public-friendly notes
+      description: Describe what you want customized. Keep sensitive financial details out of the public issue.
+      placeholder: I want the planner adapted for a solo consulting business with retainers and project work.
+    validations:
+      required: false
