@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://albercr3.github.io/freelancer-profit-planner/sitemap.xml
